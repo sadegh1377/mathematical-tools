@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <img src="../assets/multimedia/b&s (5).png" alt="logo" class="logo" id="Sadegh & Bagher">
     <div class="container  math">
       <div class="row">
         <div class="tools p-2 pt-3 m-0 col-md-4 col-sm-5 col-lg-3">
@@ -127,46 +128,108 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.home {
-
-  .logo {
-    position: absolute;
-    left: 20px;
-    top: 10px;
-    width: 50px;
-    height: 50px;
-    box-shadow: 1px 1px 3px 1px rgba(138, 58, 58, 0.582);
-    opacity: 0.9;
-
-    &:hover {
-      width: 53px;
-      height: 53px;
-      box-shadow: 1px 1px 5px 2px rgba(138, 58, 58, 0.877);
-      opacity: 1;
+  .home {
+    height: 100vh;
+    direction: ltr;
+    text-align: left;
+    position: relative;
+    .logo {
+      position: absolute;
+      background-color: transparent;
+      left: 20px;
+      top: 10px;
+      width: 50px;
+      height: 50px;
+      // box-shadow: 1px 1px 3px 1px rgba(138, 58, 58, 0.582);
+      opacity: 0.9;
+      &:hover {
+        width: 53px;
+        height: 53px;
+        box-shadow: 1px 1px 5px 2px rgba(138, 58, 58, 0.877);
+        border-radius: 50%;
+        opacity: 1;
+      }
     }
-  }
-
-  .math {
-    transform: translate(5%, 11%);
-
-    .tools {
-      background-color: white;
-      border-radius: 15px;
-      border-color: rgb(66, 60, 49);
-      border-width: 1px !important;
-      box-shadow: 1px 1px 3px 1px rgba(20, 158, 151, 0.445);
-
-      .accordion-body {
-        max-height: 350px;
-        overflow-y: scroll;
-        list-style: none;
-        padding: none;
-        margin: none;
-
-        .btn {
-          text-align: center !important;
-          width: 40px !important;
-
+    .math {
+      transform: translate(5%, 11%);
+      .tools {
+        background-color: white;
+        border-radius: 15px;
+        border-color: rgb(66, 60, 49);
+        border-width: 1px !important;
+        box-shadow: 1px 1px 3px 1px rgba(20, 158, 151, 0.445);
+        .accordion-body {
+          max-height: 350px;
+          overflow-y: scroll;
+          list-style: none;
+          padding: none;
+          margin: none;
+          .btn {
+            text-align: center !important;
+            width: 40px !important;
+            &:hover {
+              box-shadow: 1px 1px 2px 1px #0d7180af;
+              color: white !important;
+            }
+          }
+        }
+      }
+      .input {
+        .textarea {
+          margin: 5px;
+          padding: 25px;
+          background-color: whitesmoke;
+          width: 90%;
+          min-height: 300px;
+          max-height: 333px;
+          border-radius: 8px;
+          border-width: 2px;
+          border-color: rgba(0, 110, 255, 0.637);
+          border-end-end-radius: 5px;
+          color: black;
+          font-size: 16px;
+          font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
+          &:hover {
+            font-size: 17px;
+            box-shadow: 1px 1px 5px 1px rgba(0, 110, 255, 0.637);
+            border-color: rgba(0, 0, 255, 0.685);
+            cursor: pointer;
+          }
+          &:focus {
+            font-size: 20px;
+            box-shadow: 1px 1px 2px 1px rgba(0, 110, 255, 0.637);
+            background: white;
+            border-color: blue;
+            outline: none;
+            cursor: text;
+            overflow-y: scroll;
+          }
+        }
+      }
+      .box-output {
+        position: relative;
+        .output {
+          border-style: solid;
+          border-color: rgba(78, 180, 138, 0.959);
+          border-width: 2px;
+          margin: 5px;
+          padding: 30px;
+          background-color: rgba(164, 223, 198, 0.774);
+          width: 89.7%;
+          height: 300px;
+          border-radius: 8px;
+          color: black;
+          font-size: 18px;
+          font-weight: 700;
+          font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
+          font-size: 17px;
+          box-shadow: 2px 2px 5px 2px rgb(107, 129, 120);
+        }
+        .copy {
+          position: absolute;
+          right: 120px;
+          bottom: 25px;
+          text-align: center;
           &:hover {
             box-shadow: 1px 1px 2px 1px #0d7180af;
             color: white !important;
@@ -174,98 +237,24 @@ export default {
         }
       }
     }
-
-    .input {
-      .textarea {
-        margin: 5px;
-        padding: 25px;
-        background-color: whitesmoke;
-        width: 90%;
-        min-height: 300px;
-        max-height: 333px;
-        border-radius: 8px;
-        border-width: 2px;
-        border-color: rgba(0, 110, 255, 0.637);
-        border-end-end-radius: 5px;
-        color: black;
-        font-size: 16px;
-        font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
-
-        &:hover {
-          font-size: 17px;
-          box-shadow: 1px 1px 5px 1px rgba(0, 110, 255, 0.637);
-          border-color: rgba(0, 0, 255, 0.685);
-          cursor: pointer;
-        }
-
-        &:focus {
-          font-size: 20px;
-          box-shadow: 1px 1px 2px 1px rgba(0, 110, 255, 0.637);
-          background: white;
-          border-color: blue;
-          outline: none;
-          cursor: text;
-          overflow-y: scroll;
-        }
-      }
-    }
-
-    .box-output {
-      position: relative;
-
-      .output {
-        border-style: solid;
-        border-color: rgba(78, 180, 138, 0.959);
-        border-width: 2px;
-        margin: 5px;
-        padding: 30px;
-        background-color: rgba(164, 223, 198, 0.774);
-        width: 89.7%;
-        height: 300px;
-        border-radius: 8px;
-        color: black;
-        font-size: 18px;
-        font-weight: 700;
-        font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
-        font-size: 17px;
-        box-shadow: 2px 2px 5px 2px rgb(107, 129, 120);
-      }
-
-      .copy {
-        position: absolute;
-        right: 120px;
-        bottom: 25px;
-        text-align: center;
-
-        &:hover {
-          box-shadow: 1px 1px 2px 1px #0d7180af;
-          color: white !important;
-        }
-      }
-    }
   }
-}
 
-::-webkit-scrollbar {
-  width: 5px;
-}
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  /* Track */
 
-/* Track */
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+  /* Handle */
 
-::-webkit-scrollbar-track {
-  background: none;
-}
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 255, 0.685);
+  }
+  /* Handle on hover */
 
-/* Handle */
-
-::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 255, 0.685);
-}
-
-/* Handle on hover */
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 255, 0.685);
-}
-
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 255, 0.685);
+  }
 </style>
