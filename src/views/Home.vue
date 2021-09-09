@@ -1,260 +1,389 @@
 <template>
-  <div class="home">
-    <img src="../assets/multimedia/b&s (5).png" alt="logo" class="logo" id="Sadegh & Bagher">
-    <div class="container  math">
-      <div class="row">
-        <div class="tools p-2 pt-3 m-0 col-md-4 col-sm-5 col-lg-3">
+    <div class="home">
+        <img src="../assets/multimedia/b&s (5).png" alt="logo" class="logo" id="Sadegh & Bagher">
+        <div class="container  math">
+            <div class="row">
+                <div class="tools p-2 pt-3 m-0 col-md-4 col-sm-5 col-lg-3">
 
 
-          <div class="accordion accordion-flush" id="accordionFlushExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingOne">
-                <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                  <b>Simple mathematical</b>
-                </button>
-              </h2>
-              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                   data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingOne">
+                                <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    <b>Simple mathematical</b>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingOne"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
 
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="divide" aria-hidden="true"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="times" aria-hidden="true"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="minus" aria-hidden="true"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="plus" aria-hidden="true"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="percent" aria-hidden="true"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="equals" aria-hidden="true"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="backspace" aria-hidden="true"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="eraser" aria-hidden="true"/>
-                  </button>
+                                    <button @click="getOperate('/')" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="divide" aria-hidden="true"/>
+                                    </button>
+                                    <button @click="getOperate('*')" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="times" aria-hidden="true"/>
+                                    </button>
+                                    <button @click="getOperate('-')" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="minus" aria-hidden="true"/>
+                                    </button>
+                                    <button @click="getOperate('+')" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="plus" aria-hidden="true"/>
+                                    </button>
+                                    <button @click="getOperate('%')" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="percent" aria-hidden="true"/>
+                                    </button>
+                                    <button @click="equal" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="equals" aria-hidden="true"/>
+                                    </button>
+                                    <button @click="deleteJustOne" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="backspace" aria-hidden="true"/>
+                                    </button>
+                                    <button @click="deleteAll" class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="eraser" aria-hidden="true"/>
+                                    </button>
 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                    <b>Mathematical geometric</b>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingTwo"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+
+
+                                    <button @click="showModal = true" title="area square"
+                                            class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="square"/>
+                                    </button>
+                                    <button class="btn m-1 btn-outline-info btn-light"><i class="far fa-square"></i>
+                                    </button>
+                                    <button class="btn m-1 btn-outline-info btn-light">
+                                        <font-awesome-icon icon="circle"/>
+                                    </button>
+                                    <button class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
+                                    </button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
+                                    فرمول های جانبی
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                 aria-labelledby="flush-headingThree"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">Placeholder content for this accordion, which is intended to
+                                    demonstrate the
+                                    <code>.accordion-flush</code> class. This is the third item's accordion body.
+                                    Nothing more exciting
+                                    happening here in terms of content, but just filling
+                                    up the space to make it look, at least at first glance, a bit more representative of
+                                    how this would
+                                    look in a real-world application. Placeholder content for this accordion, which is
+                                    intended to
+                                    demonstrate the <code>.accordion-flush</code> class. This is the third item's
+                                    accordion body. Nothing
+                                    more exciting happening here in terms of content, but just filling up the space to
+                                    make it look, at
+                                    least at first glance, a bit more representative of how this would
+                                    look in a real-world application. Placeholder content for this accordion, which is
+                                    intended to
+                                    demonstrate the <code>.accordion-flush</code> class. This is the third item's
+                                    accordion body. Nothing
+                                    more exciting happening
+                                    here in terms of content, but just filling up the space to make it look, at least at
+                                    first glance, a
+                                    bit more representative of how this would look in a real-world application.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                  <b>Mathematical geometric</b>
-                </button>
-              </h2>
-              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
-                   data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">
 
 
-                  <button title="area square" class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="square"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light"><i class="far fa-square"></i></button>
-                  <button class="btn m-1 btn-outline-info btn-light">
-                    <font-awesome-icon icon="circle"/>
-                  </button>
-                  <button class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i></button>
+                <div class="col-lg-9 col-md-8 col-sm-7  p-0 m-0">
+                    <div class="input">
+                        <textarea v-model="inputNum" @keyup.enter="equal" class="textarea"
+                                  placeholder="enter your text..."></textarea>
+                    </div>
+                    <div class="box-output">
+                        <label class="output">output : <span v-for="item in answer">
+                            <br>{{item}}
+                        </span>
 
 
+                        </label>
+                        <button class="btn btn-light  btn-lg btn-outline-info pb-3  copy">copy</button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="flush-headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                  فرمول های جانبی
-                </button>
-              </h2>
-              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree"
-                   data-bs-parent="#accordionFlushExample">
-                <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the
-                  <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting
-                  happening here in terms of content, but just filling
-                  up the space to make it look, at least at first glance, a bit more representative of how this would
-                  look in a real-world application. Placeholder content for this accordion, which is intended to
-                  demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing
-                  more exciting happening here in terms of content, but just filling up the space to make it look, at
-                  least at first glance, a bit more representative of how this would
-                  look in a real-world application. Placeholder content for this accordion, which is intended to
-                  demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing
-                  more exciting happening
-                  here in terms of content, but just filling up the space to make it look, at least at first glance, a
-                  bit more representative of how this would look in a real-world application.
-                </div>
-              </div>
-            </div>
-          </div>
+
         </div>
+        <div class="overlay" v-if="showModal" @click="showModal = false"></div>
 
-
-        <div class="col-lg-9 col-md-8 col-sm-7  p-0 m-0">
-          <div class="input">
-            <textarea class="textarea" placeholder="enter your text..."></textarea>
-          </div>
-          <div class="box-output">
-            <label class="output">output : 15
-
-
-            </label>
-            <button class="btn btn-light  btn-lg btn-outline-info pb-3   copy">copy</button>
-          </div>
+        <!-- modal -->
+        <div class="modal" v-if="showModal">
+            <button class="close" @click="showModal = false">x</button>
+            <h3>Title</h3>
+            <label>enter number</label>
+            <input v-model="side_square" min="1" type="number">
+            <button type="submit" @click="area_square()">submit</button>
+            <label>{{answer}}</label>
         </div>
-      </div>
-
     </div>
-
-  </div>
 </template>
 
 <script>
 
+    export default {
+        name: 'Home',
+        data() {
+            return {
+                inputNum: "",
+                answer: [],
+                showModal: false,
+                side_square: "",
+            }
+        },
+        methods: {
+            getOperate(element) {
+                if (this.inputNum.charAt(0) === "0") {
+                    this.inputNum = ""
+                }
+                // if (this.inputNum.length < 9) {
+                this.inputNum += element;
+                console.log(this.inputNum)
+                // } else {}
+            },
+            square() {
+                eval(this.inputNum) < 0 ? this.answer = "Can not suqre the negative value"
+                    : this.answer = Math.sqrt(eval(this.inputNum));
+            },
+            area_square() {
+                this.answer = this.side_square * 4;
 
-export default {
-  name: 'Home',
-  components: {}
-}
+            }
+
+            ,
+            equal() {
+                if (this.answer.length < 10) {
+                    this.answer.push(eval(this.inputNum));
+                }
+                else{
+                    this.answer=[]
+                }
+
+            },
+
+
+            deleteAll() {
+                this.inputNum = "";
+                this.answer = "";
+                // this.isDisable = false
+            },
+
+
+            deleteJustOne() {
+                this.inputNum = this.inputNum.slice(0, -1);
+            },
+        },
+
+        components: {}
+    }
 </script>
 <style lang="scss" scoped>
-  .home {
-    height: 100vh;
-    direction: ltr;
-    text-align: left;
-    position: relative;
-    .logo {
-      position: absolute;
-      background-color: transparent;
-      left: 20px;
-      top: 10px;
-      width: 50px;
-      height: 50px;
-      // box-shadow: 1px 1px 3px 1px rgba(138, 58, 58, 0.582);
-      opacity: 0.9;
-      &:hover {
-        width: 53px;
-        height: 53px;
-        box-shadow: 1px 1px 5px 2px rgba(138, 58, 58, 0.877);
-        border-radius: 50%;
-        opacity: 1;
-      }
-    }
-    .math {
-      transform: translate(5%, 11%);
-      .tools {
-        background-color: white;
-        border-radius: 15px;
-        border-color: rgb(66, 60, 49);
-        border-width: 1px !important;
-        box-shadow: 1px 1px 3px 1px rgba(20, 158, 151, 0.445);
-        .accordion-body {
-          max-height: 350px;
-          overflow-y: scroll;
-          list-style: none;
-          padding: none;
-          margin: none;
-          .btn {
-            text-align: center !important;
-            width: 40px !important;
-            &:hover {
-              box-shadow: 1px 1px 2px 1px #0d7180af;
-              color: white !important;
-            }
-          }
-        }
-      }
-      .input {
-        .textarea {
-          margin: 5px;
-          padding: 25px;
-          background-color: whitesmoke;
-          width: 90%;
-          min-height: 300px;
-          max-height: 333px;
-          border-radius: 8px;
-          border-width: 2px;
-          border-color: rgba(0, 110, 255, 0.637);
-          border-end-end-radius: 5px;
-          color: black;
-          font-size: 16px;
-          font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
-          &:hover {
-            font-size: 17px;
-            box-shadow: 1px 1px 5px 1px rgba(0, 110, 255, 0.637);
-            border-color: rgba(0, 0, 255, 0.685);
-            cursor: pointer;
-          }
-          &:focus {
-            font-size: 20px;
-            box-shadow: 1px 1px 2px 1px rgba(0, 110, 255, 0.637);
-            background: white;
-            border-color: blue;
-            outline: none;
-            cursor: text;
-            overflow-y: scroll;
-          }
-        }
-      }
-      .box-output {
+    .home {
+        height: 100vh;
+        direction: ltr;
+        text-align: left;
         position: relative;
-        .output {
-          border-style: solid;
-          border-color: rgba(78, 180, 138, 0.959);
-          border-width: 2px;
-          margin: 5px;
-          padding: 30px;
-          background-color: rgba(164, 223, 198, 0.774);
-          width: 89.7%;
-          height: 300px;
-          border-radius: 8px;
-          color: black;
-          font-size: 18px;
-          font-weight: 700;
-          font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
-          font-size: 17px;
-          box-shadow: 2px 2px 5px 2px rgb(107, 129, 120);
+
+        .logo {
+            position: absolute;
+            background-color: transparent;
+            left: 20px;
+            top: 10px;
+            width: 50px;
+            height: 50px;
+            // box-shadow: 1px 1px 3px 1px rgba(138, 58, 58, 0.582);
+            opacity: 0.9;
+
+            &:hover {
+                width: 53px;
+                height: 53px;
+                box-shadow: 1px 1px 5px 2px rgba(138, 58, 58, 0.877);
+                border-radius: 50%;
+                opacity: 1;
+            }
         }
-        .copy {
-          position: absolute;
-          right: 120px;
-          bottom: 25px;
-          text-align: center;
-          &:hover {
-            box-shadow: 1px 1px 2px 1px #0d7180af;
-            color: white !important;
-          }
+
+        .math {
+            transform: translate(5%, 11%);
+
+            .tools {
+                background-color: white;
+                border-radius: 15px;
+                border-color: rgb(66, 60, 49);
+                border-width: 1px !important;
+                box-shadow: 1px 1px 3px 1px rgba(20, 158, 151, 0.445);
+
+                .accordion-body {
+                    max-height: 350px;
+                    overflow-y: scroll;
+                    list-style: none;
+                    padding: 5px;
+                    margin: 0px;
+
+                    .btn {
+                        text-align: center !important;
+                        width: 40px !important;
+
+                        &:hover {
+                            box-shadow: 1px 1px 2px 1px #0d7180af;
+                            color: white !important;
+                        }
+                    }
+                }
+            }
+
+            .input {
+                .textarea {
+                    margin: 5px;
+                    padding: 25px;
+                    background-color: whitesmoke;
+                    width: 90%;
+                    min-height: 300px;
+                    max-height: 333px;
+                    border-radius: 8px;
+                    border-width: 2px;
+                    border-color: rgba(0, 110, 255, 0.637);
+                    border-end-end-radius: 5px;
+                    color: black;
+                    font-size: 16px;
+                    font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
+
+                    &:hover {
+                        font-size: 17px;
+                        box-shadow: 1px 1px 5px 1px rgba(0, 110, 255, 0.637);
+                        border-color: rgba(0, 0, 255, 0.685);
+                        cursor: pointer;
+                    }
+
+                    &:focus {
+                        font-size: 20px;
+                        box-shadow: 1px 1px 2px 1px rgba(0, 110, 255, 0.637);
+                        background: white;
+                        border-color: blue;
+                        outline: none;
+                        cursor: text;
+                        overflow-y: scroll;
+                    }
+                }
+            }
+
+            .box-output {
+                position: relative;
+
+                .output {
+                    border-style: solid;
+                    border-color: rgba(78, 180, 138, 0.959);
+                    border-width: 2px;
+                    margin: 5px;
+                    padding: 30px;
+                    background-color: rgba(164, 223, 198, 0.774);
+                    width: 89.7%;
+                    height: 300px;
+                    border-radius: 8px;
+                    color: black;
+                    font-size: 18px;
+                    font-weight: 700;
+                    font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
+                    font-size: 17px;
+                    box-shadow: 2px 2px 5px 2px rgb(107, 129, 120);
+                }
+
+                .copy {
+                    position: absolute;
+                    right: 120px;
+                    bottom: 25px;
+                    text-align: center;
+
+                    &:hover {
+                        box-shadow: 1px 1px 2px 1px #0d7180af;
+                        color: white !important;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-  /* Track */
+    .overlay {
+        position: fixed;
+        z-index: 9998;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+    }
 
-  ::-webkit-scrollbar-track {
-    background: none;
-  }
-  /* Handle */
+    .modal {
+        position: absolute;
+        left: 40%;
+        top: 20%;
+        width: 400px;
+        height: 200px;
+        z-index: 9999;
+        margin: 0 auto;
+        padding: 20px 30px;
+        display: block !important;
+        background-color: #fff;
+    }
 
-  ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 255, 0.685);
-  }
-  /* Handle on hover */
+    .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 255, 0.685);
-  }
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    /* Track */
+
+    ::-webkit-scrollbar-track {
+        background: none;
+    }
+
+    /* Handle */
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 255, 0.685);
+    }
+
+    /* Handle on hover */
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 255, 0.685);
+    }
+
+
 </style>

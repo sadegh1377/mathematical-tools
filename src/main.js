@@ -5,6 +5,7 @@ import store from './store'
 import Axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap'
+//import VModal from 'vue-js-modal'
 import {library} from '@fortawesome/fontawesome-svg-core'
 import {
     faDivide,
@@ -27,7 +28,7 @@ library.add(faBackspace, faEraser, faMinus, faPlus, faEquals, faPercent, faTimes
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-
+// Vue.use(VModal)
 Vue.prototype.$http = Axios;
 Vue.config.productionTip = false
 
