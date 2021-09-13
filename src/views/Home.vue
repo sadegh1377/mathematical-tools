@@ -201,7 +201,7 @@
                 Number : <input v-model="figure_size.number_width" min="1">
             </div>
 
-            <button class="btn btn-light  btn-lg btn-outline-info" type="submit" @click="area()">submit</button>
+            <button class="btn btn-light  btn-lg btn-outline-info" type="submit" @click="perimeter()">submit</button>
             <label v-if="temp!==0">{{temp}}</label>
         </div>
     </div>
@@ -226,15 +226,15 @@
                     number_width: '',
                     length: '',//طول
                     radius: '',//شعاع
-                    width_large: '',
-                    width_small: '',
+                    large_width: '',
+                    small_width: '',
                     multiWidth: []//برای اشکالی که بیشتر از دو یا چند قاعده دارند
                 }
             }
         },
         methods: {
 
-            area() {
+            perimeter() {
                 if (this.figure_type === 'square') {
                     this.temp = parseFloat(this.figure_size.width * 4);
                     this.answer.push(this.temp)
@@ -244,11 +244,16 @@
                     this.answer.push(this.temp)
                 }
                 if (this.figure_type === 'triangle') {
-                    this.temp = parseFloat(this.figure_size.multiWidth[0]) + parseFloat(this.figure_size.multiWidth[2]) + parseFloat(this.figure_size.multiWidth[1]);
+                    this.temp = parseFloat(this.figure_size.multiWidth[0]) +
+                        parseFloat(this.figure_size.multiWidth[2]) +
+                        parseFloat(this.figure_size.multiWidth[1]);
                     this.answer.push(this.temp)
                 }
                 if (this.figure_type === 'unregular_polygon') {
-                    this.temp = parseFloat(this.figure_size.multiWidth[0]) + parseFloat(this.figure_size.multiWidth[1]) + parseFloat(this.figure_size.multiWidth[2]) + parseFloat(this.figure_size.multiWidth[3]);
+                    this.temp = parseFloat(this.figure_size.multiWidth[0]) +
+                        parseFloat(this.figure_size.multiWidth[1]) +
+                        parseFloat(this.figure_size.multiWidth[2]) +
+                        parseFloat(this.figure_size.multiWidth[3]);
                     this.answer.push(this.temp)
                 }
                 if (this.figure_type === 'circle') {
@@ -262,8 +267,56 @@
 
 
             },
+            area() {
+                if (this.figure_type === 'area_square') {
+                    this.temp = math.pow(parseFloat(this.figure_size.width), 2);
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_rectagle') {
+                    this.temp = parseFloat(this.figure_size.width) * parseFloat(this.figure_size.length);
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_triangle') {
+                    this.temp = (parseFloat(this.figure_size.width) * parseFloat(this.figure_size.height)) / 2;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_parallelogram') {
+                    this.temp = parseFloat(this.figure_size.width) * parseFloat(this.figure_size.height);
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_trapezius') {
+                    this.temp = ((parseFloat(this.figure_size.small_width) + parseFloat(this.figure_size.large_width))
+                        * this.figure_size.height) / 2;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_circle') {
+                    this.temp = math.pow(parseFloat(this.figure_size.radius), 2) * Math.PI;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_oval') {
+                    this.temp = parseFloat(this.figure_size.multiWidth[1]) * parseFloat(this.figure_size.multiWidth[0]) * Math.PI;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_cube') {
+                    this.temp = math.pow(parseFloat(this.figure_size.width), 2) * 6;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'area_rectangular_cube') {
+                    this.temp = 2 * (parseFloat(this.figure_size.multiWidth[0]) * parseFloat(this.figure_size.multiWidth[1])) +
+                        2 * (parseFloat(this.figure_size.multiWidth[0]) * parseFloat(this.figure_size.multiWidth[2])) +
+                        2 * (parseFloat(this.figure_size.multiWidth[2]) * parseFloat(this.figure_size.multiWidth[1]));
+                    this.answer.push(this.temp)
+                }
 
-            
+
+                // if (this.figure_type === 'regular_polygon') {
+                //     this.temp = parseInt(this.figure_size.number_width) * parseFloat(this.figure_size.width);
+                //     this.answer.push(this.temp)
+                // }
+
+            },
+
+
             figure_type_selector(f_type) {
 
                 this.figure_type = f_type;
@@ -293,6 +346,7 @@
                 } else {
                     this.answer = []
                 }
+
 
             },
 
