@@ -76,10 +76,10 @@
                                     <button @click="showModal = true,figure_type_selector('circle')"
                                             class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
                                     </button>
-                                    <button @click="showModal = true,figure_type_selector('parallelogram')"
+                                    <button @click="showModal = true,figure_type_selector('regular_polygon')"
                                             class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
                                     </button>
-                                    <button @click="showModal = true,figure_type_selector('trapezius')"
+                                    <button @click="showModal = true,figure_type_selector('unregular_polygon')"
                                             class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
                                     </button>
 
@@ -152,28 +152,55 @@
             <button class="close btn-close" @click="showModal = false"></button>
             <h3> Area {{figure_type}}</h3>
             <hr>
-            <label v-if="figure_type==='square'">enter number:</label><br v-if="figure_type==='square'">
-            <input v-if="figure_type==='square'" v-model="figure_size.width" min="1">
-            <label v-if="figure_type==='rectagle'">enter numbers:</label><br v-if="figure_type==='rectagle'">
-            <input v-if="figure_type==='rectagle'" v-model="figure_size.width" min="1">
-            <input v-if="figure_type==='rectagle'" v-model="figure_size.length" min="1">
-            <label v-if="figure_type==='triangle'">enter numbers:</label><br v-if="figure_type==='triangle'">
-            <input v-if="figure_type==='triangle'" v-model="figure_size.multiWidth[0]" min="1">
-            <input v-if="figure_type==='triangle'" v-model="figure_size.multiWidth[1]" min="1">
-            <input v-if="figure_type==='triangle'" v-model="figure_size.multiWidth[2]" min="1">
-            <label v-if="figure_type==='circle'">enter number:</label><br v-if="figure_type==='circle'">
-            <input v-if="figure_type==='circle'" v-model="figure_size.radius" min="1">
-            <label v-if="figure_type==='parallelogram' || figure_type==='trapezius'">enter numbers:</label><br
-                v-if="figure_type==='parallelogram' || figure_type==='trapezius'">
-            <input v-if="figure_type==='parallelogram' || figure_type==='trapezius'" v-model="figure_size.width"
-                   min="1">
-            <input v-if="figure_type==='parallelogram' || figure_type==='trapezius'" v-model="figure_size.width"
-                   min="1">
-            <input placeholder="..." v-if="figure_type==='parallelogram' || figure_type==='trapezius'"
-                   v-model="figure_size.width"
-                   min="1">
-            <input v-if="figure_type==='parallelogram' || figure_type==='trapezius'" v-model="figure_size.width"
-                   min="1">
+            <!--       Squre        -->
+
+            <div v-if="figure_type==='square'">
+                <label>enter Width:</label>
+                <br>
+                <input v-model="figure_size.width" min="1">
+            </div>
+
+            <!--       rectagle     -->
+            <div v-if="figure_type==='rectagle'">
+                <label>enter value:</label><br>
+                Width : <input v-model="figure_size.width" min="1">
+                length : <input v-model="figure_size.length" min="1">
+            </div>
+
+            <!--       triangle     -->
+            <div v-if="figure_type==='triangle'">
+                <label>enter values:</label>
+                <br>
+                <input v-model="figure_size.multiWidth[0]" min="1">
+                <input v-model="figure_size.multiWidth[1]" min="1">
+                <input v-model="figure_size.multiWidth[2]" min="1">
+            </div>
+
+            <!--       circle      -->
+            <div v-if="figure_type==='circle'">
+                <label>enter radius:</label>
+                <br>
+                <input v-model="figure_size.radius" min="1">
+            </div>
+
+            <!--       unregular_polygon      -->
+            <div v-if="figure_type==='unregular_polygon'">
+                <label>enter Widths:</label>
+                <br>
+                <input v-model="figure_size.multiWidth[0]" min="1">
+                <input v-model="figure_size.multiWidth[1]" min="1">
+                <input v-model="figure_size.multiWidth[2]" min="1">
+                <input v-model="figure_size.multiWidth[3]" min="1">
+            </div>
+
+            <!--       regular_polygon     -->
+            <div v-if="figure_type==='regular_polygon'">
+                <label>enter values:</label>
+                <br>
+                Width : <input v-model="figure_size.width" min="1">
+                Number : <input v-model="figure_size.number_width" min="1">
+            </div>
+
             <button class="btn btn-light  btn-lg btn-outline-info" type="submit" @click="area()">submit</button>
             <label v-if="temp!==0">{{temp}}</label>
         </div>
@@ -186,6 +213,7 @@
         name: 'Home',
         data() {
             return {
+
                 inputNum: "",
                 answer: [],
                 temp: 0,
@@ -195,6 +223,7 @@
                 figure_size: {
                     height: '',//ارتفاع
                     width: '',//عرض
+                    number_width: '',
                     length: '',//طول
                     radius: '',//شعاع
                     width_large: '',
@@ -207,28 +236,34 @@
 
             area() {
                 if (this.figure_type === 'square') {
-                    this.temp = this.figure_size.width * 4;
+                    this.temp = parseFloat(this.figure_size.width * 4);
                     this.answer.push(this.temp)
                 }
                 if (this.figure_type === 'rectagle') {
-                    this.temp = this.figure_size.width * 2 + this.figure_size.length * 2;
+                    this.temp = parseFloat(this.figure_size.width) * 2 + parseFloat(this.figure_size.length) * 2;
                     this.answer.push(this.temp)
                 }
                 if (this.figure_type === 'triangle') {
-                    this.temp = this.figure_size.multiWidth[0] + this.figure_size.multiWidth[2] + this.figure_size.multiWidth[1];
+                    this.temp = parseFloat(this.figure_size.multiWidth[0]) + parseFloat(this.figure_size.multiWidth[2]) + parseFloat(this.figure_size.multiWidth[1]);
                     this.answer.push(this.temp)
                 }
-                if (this.figure_type === 'parallelogram' || this.figure_type === 'trapezius') {
-                    this.temp = this.figure_size.multiWidth[0] + this.figure_size.multiWidth[1] + this.figure_size.multiWidth[2] + this.figure_size.multiWidth[3];
+                if (this.figure_type === 'unregular_polygon') {
+                    this.temp = parseFloat(this.figure_size.multiWidth[0]) + parseFloat(this.figure_size.multiWidth[1]) + parseFloat(this.figure_size.multiWidth[2]) + parseFloat(this.figure_size.multiWidth[3]);
                     this.answer.push(this.temp)
                 }
                 if (this.figure_type === 'circle') {
-                    this.temp = 2 * this.figure_size.radius * Math.PI;
+                    this.temp = 2 * parseFloat(this.figure_size.radius) * Math.PI;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'regular_polygon') {
+                    this.temp = parseInt(this.figure_size.number_width) * parseFloat(this.figure_size.width);
                     this.answer.push(this.temp)
                 }
 
 
             },
+
+            
             figure_type_selector(f_type) {
 
                 this.figure_type = f_type;
