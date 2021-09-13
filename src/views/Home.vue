@@ -62,16 +62,25 @@
                                 <div class="accordion-body">
 
 
-                                    <button @click="showModal = true" title="area square"
+                                    <button @click="showModal = true,figure_type_selector('square')" title="area square"
                                             class="btn m-1 btn-outline-info btn-light">
                                         <font-awesome-icon icon="square"/>
                                     </button>
-                                    <button class="btn m-1 btn-outline-info btn-light"><i class="far fa-square"></i>
+                                    <button @click="showModal = true,figure_type_selector('rectagle')"
+                                            class="btn m-1 btn-outline-info btn-light"><i class="far fa-square"></i>
                                     </button>
-                                    <button class="btn m-1 btn-outline-info btn-light">
+                                    <button @click="showModal = true,figure_type_selector('triangle')"
+                                            class="btn m-1 btn-outline-info btn-light">
                                         <font-awesome-icon icon="circle"/>
                                     </button>
-                                    <button class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
+                                    <button @click="showModal = true,figure_type_selector('circle')"
+                                            class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
+                                    </button>
+                                    <button @click="showModal = true,figure_type_selector('parallelogram')"
+                                            class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
+                                    </button>
+                                    <button @click="showModal = true,figure_type_selector('trapezius')"
+                                            class="btn m-1 btn-outline-info btn-light"><i class="far fa-circle"></i>
                                     </button>
 
 
@@ -125,7 +134,7 @@
                     </div>
                     <div class="box-output">
                         <label class="output">output : <span v-for="item in answer">
-                            <br>{{item}}
+                            {{item}} ,
                         </span>
 
 
@@ -140,12 +149,33 @@
 
         <!-- modal -->
         <div class="modal" v-if="showModal">
-            <button class="close" @click="showModal = false">x</button>
-            <h3>Title</h3>
-            <label>enter number</label>
-            <input v-model="side_square" min="1" type="number">
-            <button type="submit" @click="area_square()">submit</button>
-            <label>{{answer}}</label>
+            <button class="close btn-close" @click="showModal = false"></button>
+            <h3> Area {{figure_type}}</h3>
+            <hr>
+            <label v-if="figure_type==='square'">enter number:</label><br v-if="figure_type==='square'">
+            <input v-if="figure_type==='square'" v-model="figure_size.width" min="1">
+            <label v-if="figure_type==='rectagle'">enter numbers:</label><br v-if="figure_type==='rectagle'">
+            <input v-if="figure_type==='rectagle'" v-model="figure_size.width" min="1">
+            <input v-if="figure_type==='rectagle'" v-model="figure_size.length" min="1">
+            <label v-if="figure_type==='triangle'">enter numbers:</label><br v-if="figure_type==='triangle'">
+            <input v-if="figure_type==='triangle'" v-model="figure_size.multiWidth[0]" min="1">
+            <input v-if="figure_type==='triangle'" v-model="figure_size.multiWidth[1]" min="1">
+            <input v-if="figure_type==='triangle'" v-model="figure_size.multiWidth[2]" min="1">
+            <label v-if="figure_type==='circle'">enter number:</label><br v-if="figure_type==='circle'">
+            <input v-if="figure_type==='circle'" v-model="figure_size.radius" min="1">
+            <label v-if="figure_type==='parallelogram' || figure_type==='trapezius'">enter numbers:</label><br
+                v-if="figure_type==='parallelogram' || figure_type==='trapezius'">
+            <input v-if="figure_type==='parallelogram' || figure_type==='trapezius'" v-model="figure_size.width"
+                   min="1">
+            <input v-if="figure_type==='parallelogram' || figure_type==='trapezius'" v-model="figure_size.width"
+                   min="1">
+            <input placeholder="..." v-if="figure_type==='parallelogram' || figure_type==='trapezius'"
+                   v-model="figure_size.width"
+                   min="1">
+            <input v-if="figure_type==='parallelogram' || figure_type==='trapezius'" v-model="figure_size.width"
+                   min="1">
+            <button class="btn btn-light  btn-lg btn-outline-info" type="submit" @click="area()">submit</button>
+            <label v-if="temp!==0">{{temp}}</label>
         </div>
     </div>
 </template>
@@ -158,36 +188,75 @@
             return {
                 inputNum: "",
                 answer: [],
+                temp: 0,
                 showModal: false,
                 side_square: "",
+                figure_type: '',
+                figure_size: {
+                    height: '',//ارتفاع
+                    width: '',//عرض
+                    length: '',//طول
+                    radius: '',//شعاع
+                    width_large: '',
+                    width_small: '',
+                    multiWidth: []//برای اشکالی که بیشتر از دو یا چند قاعده دارند
+                }
             }
         },
         methods: {
+
+            area() {
+                if (this.figure_type === 'square') {
+                    this.temp = this.figure_size.width * 4;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'rectagle') {
+                    this.temp = this.figure_size.width * 2 + this.figure_size.length * 2;
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'triangle') {
+                    this.temp = this.figure_size.multiWidth[0] + this.figure_size.multiWidth[2] + this.figure_size.multiWidth[1];
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'parallelogram' || this.figure_type === 'trapezius') {
+                    this.temp = this.figure_size.multiWidth[0] + this.figure_size.multiWidth[1] + this.figure_size.multiWidth[2] + this.figure_size.multiWidth[3];
+                    this.answer.push(this.temp)
+                }
+                if (this.figure_type === 'circle') {
+                    this.temp = 2 * this.figure_size.radius * Math.PI;
+                    this.answer.push(this.temp)
+                }
+
+
+            },
+            figure_type_selector(f_type) {
+
+                this.figure_type = f_type;
+                console.log(this.figure_type)
+            },
+
+
             getOperate(element) {
                 if (this.inputNum.charAt(0) === "0") {
                     this.inputNum = ""
                 }
                 // if (this.inputNum.length < 9) {
                 this.inputNum += element;
-                console.log(this.inputNum)
+
                 // } else {}
             },
             square() {
                 eval(this.inputNum) < 0 ? this.answer = "Can not suqre the negative value"
-                    : this.answer = Math.sqrt(eval(this.inputNum));
+                    : this.answer.push(Math.sqrt(eval(this.inputNum)));
             },
-            area_square() {
-                this.answer = this.side_square * 4;
 
-            }
 
-            ,
             equal() {
                 if (this.answer.length < 10) {
                     this.answer.push(eval(this.inputNum));
-                }
-                else{
-                    this.answer=[]
+                    console.log(this.answer)
+                } else {
+                    this.answer = []
                 }
 
             },
@@ -195,8 +264,9 @@
 
             deleteAll() {
                 this.inputNum = "";
-                this.answer = "";
-                // this.isDisable = false
+                this.answer = [];
+                console.log(this.answer)
+
             },
 
 
@@ -349,12 +419,51 @@
         left: 40%;
         top: 20%;
         width: 400px;
-        height: 200px;
+        height: auto;
         z-index: 9999;
+        border-radius: 15px;
+
         margin: 0 auto;
         padding: 20px 30px;
         display: block !important;
-        background-color: #fff;
+        background-color: #97d7d0;
+
+        label {
+
+            font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
+            font-weight: 500;
+            font-size: 19px;
+        }
+
+
+        h3 {
+            font-family: 'Times New Roman', Times, serif, Georgia, 'Times New Roman', Times, serif;
+            display: inline-block;
+
+        }
+
+        input {
+            border-radius: 5px;
+            background-color: #2d47fa;
+            color: #fffdfe;
+            outline: none;
+            margin: 3.5px;
+            height: 43px;
+            width: 250px;
+
+            &:focus {
+                background-color: #202b91;
+                color: #fffdfe;
+                outline: none;
+            }
+
+        }
+
+        button {
+            display: block;
+            margin-top: 20px;
+        }
+
     }
 
     .close {
