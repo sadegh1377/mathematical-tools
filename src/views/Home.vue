@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img src="../assets/multimedia/b&s (5).png" alt="logo" class="logo" id="Sadegh & Bagher">
+    <img src="../assets/multimedia/b&s (5).png" alt="logo" class="logo" title="Bagher & Sadegh">
     <div class="container  math">
       <div class="row">
         <div class="tools p-2 pt-3 m-0 col-md-4 col-sm-5 col-lg-3">
@@ -274,7 +274,8 @@
                    aria-labelledby="flush-headingThree"
                    data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                  <button class="btn m-1 btn-outline-info btn-light" @click="showModal = true,figure_type_selector('QuadraticEquation')">Quadratic Equation
+                  <button class="btn m-1 btn-outline-info btn-light"
+                          @click="showModal = true,figure_type_selector('QuadraticEquation')">Quadratic Equation
                   </button>
                 </div>
               </div>
@@ -312,32 +313,42 @@
       <!--  QuadraticEquation -->
       <QuadraticEquation v-if="figure_type === 'QuadraticEquation'"/>
 
-      <!--       Squre        -->
+      <!--       Square        -->
 
       <div v-if="figure_type==='square'">
+        <Shapes shapeName="square" :edge1="figure_size.width"/>
+        <br>
         <label>enter Width:</label>
         <br>
         <input v-model="figure_size.width" min="1">
       </div>
 
-      <!--       rectagle     -->
+      <!--       rectangle     -->
       <div v-if="figure_type==='rectagle'">
-        <label>enter value:</label><br>
+        <Shapes shapeName="rectangle" :edge1="figure_size.width" :edge2="figure_size.length"/>
+        <br>
+        <label>enter value:</label>
+        <br>
         Width : <input v-model="figure_size.width" min="1">
         length : <input v-model="figure_size.length" min="1">
       </div>
 
       <!--       triangle     -->
       <div v-if="figure_type==='triangle'">
+        <Shapes shapeName="triangle" :edge1="figure_size.multiWidth[0]" :edge2="figure_size.multiWidth[1]"
+                :edge3="figure_size.multiWidth[2]"/>
+        <br>
         <label>enter values:</label>
         <br>
-        <input v-model="figure_size.multiWidth[0]" min="1">
-        <input v-model="figure_size.multiWidth[1]" min="1">
-        <input v-model="figure_size.multiWidth[2]" min="1">
+        edge a : <input v-model="figure_size.multiWidth[0]" min="1">
+        edge b : <input v-model="figure_size.multiWidth[1]" min="1">
+        edge c : <input v-model="figure_size.multiWidth[2]" min="1">
       </div>
 
       <!--       circle      -->
       <div v-if="figure_type==='circle'">
+        <Shapes shapeName="circle" :radius="figure_size.radius"/>
+        <br>
         <label>enter radius:</label>
         <br>
         <input v-model="figure_size.radius" min="1">
@@ -345,6 +356,7 @@
 
       <!--       unregular_polygon      -->
       <div v-if="figure_type==='unregular_polygon'">
+        <br>
         <label>enter Widths:</label>
         <br>
         <input v-model="figure_size.multiWidth[0]" min="1">
@@ -355,6 +367,8 @@
 
       <!--       regular_polygon     -->
       <div v-if="figure_type==='regular_polygon'">
+<!--        <Shapes shapeName="regular_polygon" :edge1="figure_size.width" :edge2="figure_size.number_width"/>-->
+        <br>
         <label>enter values:</label>
         <br>
         Width : <input v-model="figure_size.width" min="1">
@@ -518,12 +532,13 @@
       </div>
 
 
-      <button @click="perimeter_area , solver_al_equations" class="btn btn-light  btn-lg btn-outline-info"
+      <button @click="perimeter_area" class="btn btn-light  btn-lg btn-outline-info"
               :class="{'displayNone':figure_type === 'QuadraticEquation'}"
               type="submit">
         submit
       </button>
-      <label v-if="temp!==0">{{ temp }}</label>
+      <br>
+      <label v-if="temp!==0" style="font-weight: bold;">Answer: {{ temp }}</label>
     </div>
   </div>
 </template>
@@ -531,6 +546,7 @@
 <script>
 
 import QuadraticEquation from "./QuadraticEquation";
+import Shapes from "../components/Shapes";
 
 export default {
   name: 'Home',
@@ -570,47 +586,6 @@ export default {
   },
   methods: {
 
-    solver_al_equations: function () {
-      if (this.figure_type === 'no_figure') {
-        if (this.al_equations.degree === 'first-order') {
-          if (this.al_equations.root_2 !== null && this.al_equations.A_variable !== 0) {
-
-            this.al_equations.root_1 = (this.al_equations.C_variable - this.al_equations.B_variable * this.al_equations.root_2) / this.al_equations.A_variable;
-            this.temp = this.al_equations.root_1
-          }
-          if (this.al_equations.root_1 !== null && this.al_equations.B_variable !== 0) {
-
-            this.al_equations.root_2 = (this.al_equations.C_variable - this.al_equations.A_variable * this.al_equations.root_1) / this.al_equations.B_variable;
-            this.temp = this.al_equations.root_2
-          }
-          if (this.al_equations.A_variable === 0 && this.al_equations.B_variable === 0) {
-            alert('Unauthorized')
-          }
-          this.answer.push(this.temp)
-
-
-        }
-        if (this.al_equations.degree === 'second-order') {
-          this.al_equations.C_variable = this.al_equations.C_variable - this.al_equations.D_variable;
-
-          this.al_equations.delta = math.sqrt(math.pow(this.al_equations.A_variable, 2) - 4 * this.al_equations.B_variable * this.al_equations.C_variable);
-
-          if (this.al_equations.delta >= 0) {
-            this.al_equations.root_1 = ((this.al_equations.B_variable * -1) - this.al_equations.delta) / 2 * this.al_equations.A_variable;
-            this.al_equations.root_2 = ((this.al_equations.B_variable * -1) + this.al_equations.delta) / 2 * this.al_equations.A_variable;
-            this.answer.push(this.al_equations.root_1)
-            this.answer.push(this.al_equations.root_2)
-
-          } else {
-            this.al_equations.root_1 = 'Your answer is in the world of Complex numbers .(let go , this world is very strange :[ )';
-            this.al_equations.root_1 = 'Exactly what my brother said :)';
-          }
-        }
-
-      }
-
-
-    },
 
     perimeter_area() {
 
@@ -636,7 +611,7 @@ export default {
         this.answer.push(this.temp)
       }
       if (this.figure_type === 'circle') {
-        this.temp = 2 * parseFloat(this.figure_size.radius) * math.PI;
+        this.temp = 2 * parseFloat(this.figure_size.radius) * Math.PI;
         this.answer.push(this.temp)
       }
       if (this.figure_type === 'regular_polygon') {
@@ -762,7 +737,7 @@ export default {
     },
   },
 
-  components: {QuadraticEquation}
+  components: {Shapes, QuadraticEquation}
 }
 </script>
 <style lang="scss" scoped>
@@ -777,14 +752,14 @@ export default {
     background-color: transparent;
     left: 20px;
     top: 10px;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
     // box-shadow: 1px 1px 3px 1px rgba(138, 58, 58, 0.582);
     opacity: 0.9;
 
     &:hover {
-      width: 53px;
-      height: 53px;
+      width: 110px;
+      height: 110px;
       box-shadow: 1px 1px 5px 2px rgba(138, 58, 58, 0.877);
       border-radius: 50%;
       opacity: 1;
